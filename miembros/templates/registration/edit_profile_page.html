@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Agregar publicaciones {% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row mb-5">
+        <div class="col-md-8 mx-auto bg-success border border-4 border-dark rounded-end shadow-lg p-3 mb-5">
+            {% if user.is_authenticated %}
+            {% if user.id == profile.user.id %}
+            <h1 class="text-center mb-3">Editar Página de Perfil ...</h1>
+            <div class="form-group">
+              <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary">Actualizar Página de Perfil</button>
+                </div>
+              </form>
+            </div>
+            {% else %}
+            <p> No es el usuario correcto para editar esta página ...</p>
+            {% endif %}
+            {% else %}
+            <p>¡No tienes permisos para ingresar a esta página!</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

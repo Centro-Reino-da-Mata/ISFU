@@ -5,11 +5,18 @@ name = "pypi"
 
 [packages]
 django = "*"
+pillow = "*"
+pylint = "*"
+pylint-django = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
 dj-database-url = "*"
+python-decouple = "*"
+django-debug-toolbar = "*"
+django-ckeditor = "*"
 
 [dev-packages]
+sync = "*"
 flake8 = "*"
 
 [requires]

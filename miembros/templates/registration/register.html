@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Registrarse{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-md-6 mx-auto">
+            <div class="card mt-5 mb-3 border-success bg-success shadow-lg">
+                <div class="card-body mt-5">
+                    <h1 class="text-center">Registrarse</h1>
+                    <div class="form-group">
+                        <form method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary">Registrarse</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

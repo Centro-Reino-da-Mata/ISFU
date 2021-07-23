@@ -3,6 +3,7 @@ import sys
 import dj_database_url
 from django.core.management.utils import get_random_secret_key
 from pathlib import Path
+from decouple import Csv, config
 
 
 
@@ -17,11 +18,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = os.getenv("DEBUG", "False") == "False"
 
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
+AUTH_USER_MODEL = 'base.User'
 # Application definition
 
 INSTALLED_APPS = [
@@ -31,6 +33,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'base',
+    'miembros',
+    'blog',
+    # Aplicacion de terceros
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +69,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'isfu.wsgi.application'
+
+INTERNAL_IPS = config('INTERNAL_IPS', cast=Csv(), default='127.0.0.1')
+
+# Configuración de Django Debug Toolbar
+if DEBUG:
+    INSTALLED_APPS.append('debug_toolbar')
+    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
 
 
 # Database
@@ -119,6 +133,9 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
