@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Agregar publicaciones {% endblock %}
+{% block content %}
+{% if user.is_superuser %}
+<div class="container mx-auto">
+  <div class="row mb-5 mt-4">
+    <div class="col text-white">
+      <div class="card mt-5 border-success bg-success shadow-lg">
+        <div class="card-body">
+          <h1>Agregar publicación</h1>
+          <div class="form-group">
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form.media }}
+              {{ form.as_p }}
+              <div class="d-grid gap-2">
+                <button class="btn btn-primary">Post</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var name = "{{ user.id }}";
+  document.getElementById("alexander").value
+      = name;
+</script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% else %}
+<p class="">Usted no tiene permisos para ingresar a esta Página!!!</p>
+{% endif %}
+{% endblock content %}

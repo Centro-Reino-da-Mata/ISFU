@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}{{ cats }} {% endblock title %}
+{% block content %}
+{% if category_posts %}
+  <h1>{{ cats }}</h1>
+  <ul>
+    {% for post in category_posts %}
+      <li>
+        <a href="{% url 'article-detail' post.pk %}"> {{ post.title }} </a> -
+        {{ post.author.first_name }} - {{ post.author.email }} - {{ post.post_date }}
+        {% if user.is_superuser %}
+          <small><a href="{% url 'update_post' post.pk %}">(Editar)</a></small> -
+          <small><a href="{% url 'delete_post' post.pk %}">(Eliminar)</a></small>
+          <br />
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+    {% else %}
+  <h2>Lo sentimos está página no existe ....</h2>
+{% endif %}
+
+{% endblock content %}

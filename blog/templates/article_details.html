@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ post.title}} {% endblock title %}
+{% block content %}
+<div class="row mb-3 g-4">
+  <div class="col-md-8">
+      <h1>{{ post.title}}</h1>
+
+    <small>
+      By: {{ post.author.first_name }} -
+          {{ post.author.last_name }}
+      {{ post.post_date }}
+      <a href="{% url 'show_profile_page' post.author.profile.id %}">
+        Página de Perfil
+      </a>
+    </small>
+    <br>
+    {% if post.author.profile.profile_pic.url %}
+    <img src="{{ post.author.profile.profile_pic.url }}"
+         width="80" height="80"
+         alt="Avatar Perfil"
+         class="rounded-circle"
+    >
+    {% else %}
+    <img src="{% static 'theblog/images/icono.jpg' %}"
+         alt="Avatar Perfil"
+         width="80" height="80"
+          class="rounded-circle"
+    >
+    {% endif %}
+    <br />
+    {% if user.is_superuser %}
+    <small>
+      <a href="{% url 'update_post' post.pk %}">Editar</a> -
+      <a href="{% url 'delete_post' post.pk %}">Eliminar</a>
+    </small>
+    {% endif %}
+    <hr />
+    <br />
+    {% if post.header_image %}
+      <img src="{{ post.header_image.url }}" alt="Imagen de Post" width="600">
+    {% endif %}
+    <br>
+    <hr>
+    {{ post.body|safe }}
+    <br><br>
+    <hr>
+    <br>
+    <div id="disqus_thread"></div>
+    <a href="{% url 'home' %}" class="btn btn-secondary mb-4">Volver</a>
+    <form action="{% url 'like_post' post.pk %}" method="post">
+      {% csrf_token %}
+      {% if user.is_authenticated %}
+        {% if liked %}
+          <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-danger btn-sm">
+            No me gusta
+          </button>
+
+        {% else %}
+          <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-primary btn-sm">
+            Me gusta
+          </button>
+        {% endif %}
+      {% else %}
+      <small><a href="{% url 'login' %}">Login</a>para dar me gusta</small>
+      {% endif %}
+      - {{total_likes}} Me gusta
+    </form>
+  </div>
+  {% if cat_menu %}
+  <div class="col-md-4 mb-3 mt-5 g-4 pb-5 rounded bg-info align-self-baseline">
+    <div class="p-3">
+      <h4 class="font-italic">Categorías:</h4>
+      <ol class="list-unstyled">
+        {% for item in cat_menu %}
+          <li><a href="{% url 'category' item %}">{{ item }}</a></li>
+        {% endfor %}
+      </ol>
+    </div>
+    {% endif %}
+  </div>
+</div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://https-www-centroumbandistareinodamata-org.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+{% endblock content %}
