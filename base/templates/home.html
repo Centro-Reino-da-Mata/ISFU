@@ -25,48 +25,48 @@
   <h2 class="mt-3 text-center">Blog Centro Reino da Mata</h2>
   <div class="col-md-8 mt-5 mb-3">
     {% for post in object_list %}
-    <div class="card mb-4 flex-md-row bg-dark" style="max-height: 300px">
-      <div class="card-body d-flex flex-column align-items-start">
-        <h5 class="card-title">
-          <a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a>
-        </h5>
-        <p class="text-white">{{ post.snippet }}</p>
-        <small class="text-muted">{{ post.post_date }}</small>
-        <small class="text-muted">Autor:{{ post.author.first_name }}</small>
+      <div class="card mb-4 flex-md-row bg-dark" style="max-height: 300px">
+        <div class="card-body d-flex flex-column align-items-start">
+          <h5 class="card-title">
+            <a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a>
+          </h5>
+          <p class="text-white">{{ post.snippet }}</p>
+          <small class="text-muted">{{ post.post_date }}</small>
+          <small class="text-muted">Autor:{{ post.author.username }}</small>
+          <h6 class="text-white">Categoría:</h6>
+          <p class="card-text">
+            <small class="text-muted">
+              <a style="text-decoration: none" href="{% url 'category' post.category %}">{{ post.category }}</a>
+            </small>
+          </p>
 
-         {% if user.is_superuser %}
-        <div class="card-text mb-2">
-          <button class="btn btn-outline-primary btn-sm" type="button">
-            <a style="text-decoration: none" href="{% url 'update_post' post.pk %}">Editar</a>
-          </button>
-          <button class="btn btn-outline-primary btn-sm" type="button">
-            <a style="text-decoration: none" href="{% url 'delete_post' post.pk %}">Eliminar</a>
-          </button>
+          {% if user.is_superuser %}
+            <div class="card-text mb-2">
+              <button class="btn btn-outline-primary btn-sm" type="button">
+                <a style="text-decoration: none" href="{% url 'update_post' post.pk %}">Editar</a>
+              </button>
+              <button class="btn btn-outline-primary btn-sm" type="button">
+                <a style="text-decoration: none" href="{% url 'delete_post' post.pk %}">Eliminar</a>
+              </button>
+            </div>
+          {% endif %}
         </div>
-        {% endif %}
-        <h6 class="text-white">Categoría:</h6>
-        <p class="card-text">
-          <small class="text-muted">
-            <a style="text-decoration: none" href="{% url 'category' post.category|slugify %}">{{ post.category }}</a>
-          </small>
-        </p>
+        <img class="card-img-right flex-auto d-none d-lg-block w-100" src="{{ post.header_image.url }}"
+             alt="Imagen de Publicación"
+              style="max-width: 400px"/>
       </div>
-      <img class="card-img-right flex-auto d-none d-lg-block w-100" src="{{ post.header_image.url }}"
-           alt="Imagen de Publicación"
-            style="max-width: 400px"/>
-    </div>
     {% endfor %}
   </div>
   {% if cat_menu %}
-  <div class="col-md-4 mb-3 g-4 pb-5 rounded bg-info align-self-baseline">
-    <div class="p-3">
-      <h4 class="font-italic">Categorías:</h4>
-      <ol class="list-unstyled">
-        {% for item in cat_menu %}
-          <li><a  href="{% url 'category' item %}">{{ item }}</a></li>
-        {% endfor %}
-      </ol>
-    </div>
+    <div class="col-md-4 mb-3 g-4 pb-5 rounded bg-info align-self-baseline">
+      <div class="p-3">
+        <h4 class="font-italic">Categorías:</h4>
+        <ol class="list-unstyled">
+          {% for item in cat_menu %}
+            <li><a  href="{% url 'category' item %}">{{ item }}</a></li>
+          {% endfor %}
+        </ol>
+      </div>
     {% endif %}
   </div>
 </div>
