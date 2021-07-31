@@ -10,7 +10,7 @@ class ProfilePageForm(forms.ModelForm):
         fields = ('bio', 'profile_pic', 'facebook_url', 'twitter_url', 'instagram_url')
         widgets = {
             'bio': forms.Textarea(attrs={'class': 'form-control'}),
-            'profile_pic': forms.TextInput(attrs={'class': 'form-control', 'value': '', 'id': 'alexander', 'type': 'hidden'}),
+            #'profile_pic': forms.TextInput(attrs={'class': 'form-control', 'value': '', 'id': 'alexander', 'type': 'hidden'}),
             'facebook_url': forms.TextInput(attrs={'class': 'form-control'}),
             'twitter_url': forms.TextInput(attrs={'class': 'form-control'}),
             'instagram_url': forms.TextInput(attrs={'class': 'form-control'}),
