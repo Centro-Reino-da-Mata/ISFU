@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base',
     'miembros',
-    #'blog',
+    'blog',
     # Aplicacion de terceros
     'ckeditor',
 ]
@@ -108,12 +108,12 @@ elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
 #
 #         'PASSWORD': 'arqueometro_777',
 #
-#         'HOST': '',
+#         'HOST': 'localhost',
 #
-#         'PORT': '<db_port>',
+#         'PORT': '',
 #
 #     }
-
+# }
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
