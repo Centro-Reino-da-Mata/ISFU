@@ -97,7 +97,14 @@ elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
     if os.getenv("DATABASE_URL", None) is None:
         raise Exception("DATABASE_URL environment variable not defined")
     DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'db',
+            'USER': 'db',
+            'PASSWORD': 'kpmo83mx6rxigqgk',
+            'HOST': 'app-0a5412c0-69ca-4309-8db5-2d9ee97d0a03-do-user-9311812-0.b.db.ondigitalocean.com',
+            'PORT': '25060',
+        }
     }
 
 
