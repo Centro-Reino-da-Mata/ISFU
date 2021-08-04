@@ -80,33 +80,43 @@ if DEBUG:
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+# DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+#
+# if DEVELOPMENT_MODE is True:
+#     DATABASES = {
+#             'default': {
+#                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#                 'NAME': 'blog',
+#                 'USER': 'alexander',
+#                 'PASSWORD': 'arqueometro_777',
+#                 'HOST': 'localhost',
+#                 'PORT': '',
+#             }
+#         }
+# elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+#     if os.getenv("DATABASE_URL", None) is None:
+#         raise Exception("DATABASE_URL environment variable not defined")
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#             'NAME': 'db',
+#             'USER': 'db',
+#             'PASSWORD': 'kpmo83mx6rxigqgk',
+#             'HOST': 'app-0a5412c0-69ca-4309-8db5-2d9ee97d0a03-do-user-9311812-0.b.db.ondigitalocean.com',
+#             'PORT': '25060',
+#         }
+#     }
 
-if DEVELOPMENT_MODE is True:
-    DATABASES = {
+DATABASES = {
             'default': {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                'NAME': 'blog',
-                'USER': 'alexander',
-                'PASSWORD': 'arqueometro_777',
-                'HOST': 'localhost',
-                'PORT': '',
+                'NAME': 'db',
+                'USER': 'db',
+                'PASSWORD': 'kpmo83mx6rxigqgk',
+                'HOST': 'app-0a5412c0-69ca-4309-8db5-2d9ee97d0a03-do-user-9311812-0.b.db.ondigitalocean.com',
+                'PORT': '25060',
             }
         }
-elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
-    if os.getenv("DATABASE_URL", None) is None:
-        raise Exception("DATABASE_URL environment variable not defined")
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'db',
-            'USER': 'db',
-            'PASSWORD': 'kpmo83mx6rxigqgk',
-            'HOST': 'app-0a5412c0-69ca-4309-8db5-2d9ee97d0a03-do-user-9311812-0.b.db.ondigitalocean.com',
-            'PORT': '25060',
-        }
-    }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -139,7 +149,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
