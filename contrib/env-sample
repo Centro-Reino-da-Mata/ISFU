@@ -1,1 +1,6 @@
 INTERNAL_IPS=127.0.0.1
+NAME=db
+USER=db
+PASSWORD=kpmo83mx6rxigqgk
+HOST=app-0a5412c0-69ca-4309-8db5-2d9ee97d0a03-do-user-9311812-0.b.db.ondigitalocean.com
+PORT=25060
