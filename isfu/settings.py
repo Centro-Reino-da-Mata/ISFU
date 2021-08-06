@@ -101,7 +101,7 @@ elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'db',
             'USER': 'db',
-            'PASSWORD': 'kpmo83mx6rxigqgk',
+            'PASSWORD': 'kll81x35x9ik4qfz',
             'HOST': 'app-4414dc7f-9098-4bec-860a-ec014f0b7df7-do-user-9311812-0.b.db.ondigitalocean.com',
             'PORT': '25060',
         }
