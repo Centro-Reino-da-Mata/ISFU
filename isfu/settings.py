@@ -80,7 +80,7 @@ if DEBUG:
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "False"
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 
 if DEVELOPMENT_MODE is True:
     DATABASES = {
@@ -93,8 +93,8 @@ if DEVELOPMENT_MODE is True:
                 'PORT': '',
             }
         }
-#elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
-if os.getenv("DATABASE_URL", None) is None:
+elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+    if os.getenv("DATABASE_URL", None) is None:
         raise Exception("DATABASE_URL environment variable not defined")
     DATABASES = {
         'default': {
