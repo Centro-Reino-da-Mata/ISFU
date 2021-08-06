@@ -102,7 +102,7 @@ elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
             'NAME': 'db',
             'USER': 'db',
             'PASSWORD': 'kpmo83mx6rxigqgk',
-            'HOST': 'app-0a5412c0-69ca-4309-8db5-2d9ee97d0a03-do-user-9311812-0.b.db.ondigitalocean.com',
+            'HOST': 'app-4414dc7f-9098-4bec-860a-ec014f0b7df7-do-user-9311812-0.b.db.ondigitalocean.com',
             'PORT': '25060',
         }
     }
