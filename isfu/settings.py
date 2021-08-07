@@ -80,20 +80,22 @@ if DEBUG:
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "True") == "True"
 
 if DEVELOPMENT_MODE is True:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'db',
-            'USER': 'db',
-            'PASSWORD': 'kll81x35x9ik4qfz',
-            'HOST': 'app-4414dc7f-9098-4bec-860a-ec014f0b7df7-do-user-9311812-0.b.db.ondigitalocean.com',
-            'SSLMODE': 'require',
-            'PORT': '25060',
-
+            'NAME': config('NAME'),
+            'USER': config('USER'),
+            'PASSWORD': config('PASSWORD'),
+            'HOST': config('HOST'),
+            'OPTIONS': {
+                'sslmode': 'require',
+            },
+            'PORT': config('PORT'),
         }
+
     }
 elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
     if os.getenv("DATABASE_URL", None) is None:
