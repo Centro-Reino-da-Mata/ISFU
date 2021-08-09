@@ -93,7 +93,7 @@ if DEVELOPMENT_MODE is True:
             'OPTIONS': {
                 'sslmode': 'require',
             },
-            'PORT': os.getenv('PORT'),
+            'PORT': '',
         }
 
     }
