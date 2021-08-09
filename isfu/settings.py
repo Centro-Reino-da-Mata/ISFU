@@ -86,14 +86,14 @@ if DEVELOPMENT_MODE is True:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': config('NAME'),
-            'USER': config('USER'),
-            'PASSWORD': config('PASSWORD'),
-            'HOST': config('HOST'),
+            'NAME': os.getenv('NAME'),
+            'USER': os.getenv('USER'),
+            'PASSWORD':os.getenv('PASSWORD'),
+            'HOST': os.getenv('HOST'),
             'OPTIONS': {
                 'sslmode': 'require',
             },
-            'PORT': config('PORT'),
+            'PORT': os.getenv('PORT'),
         }
 
     }
