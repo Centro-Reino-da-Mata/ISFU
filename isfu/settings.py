@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = os.getenv("DEBUG", "True") == "True"
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
@@ -85,15 +85,8 @@ DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
 if DEVELOPMENT_MODE is True:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.getenv('NAME'),
-            'USER': os.getenv('USER'),
-            'PASSWORD':os.getenv('PASSWORD'),
-            'HOST': os.getenv('HOST'),
-            'OPTIONS': {
-                'sslmode': 'require',
-            },
-            'PORT': os.getenv('PORT'),
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
         }
 
     }

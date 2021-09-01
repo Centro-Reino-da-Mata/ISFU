@@ -3,45 +3,45 @@
 {% block title %} {{ post.title}} {% endblock title %}
 {% block content %}
 <div class="row mb-3 g-4">
-  <div class="col-md-8">
-      <h1>{{ post.title}}</h1>
-
-    <small>
-      By: {{ post.author.first_name }} -
-          {{ post.author.last_name }}
-      {{ post.post_date }}
-      <a href="{% url 'show_profile_page' post.author.profile.id %}">
-        Página de Perfil
-      </a>
-    </small>
-    <br>
-    {% if post.author.profile.profile_pic.url %}
-    <img src="{{ post.author.profile.profile_pic.url }}"
-         width="80" height="80"
-         alt="Avatar Perfil"
-         class="rounded-circle"
-    >
-    {% else %}
-    <img src="{% static 'theblog/images/icono.jpg' %}"
-         alt="Avatar Perfil"
-         width="80" height="80"
-          class="rounded-circle"
-    >
-    {% endif %}
-    <br />
-    {% if user.is_superuser %}
-    <small>
-      <a href="{% url 'update_post' post.pk %}">Editar</a> -
-      <a href="{% url 'delete_post' post.pk %}">Eliminar</a>
-    </small>
-    {% endif %}
-    <hr />
-    <br />
-    {% if post.header_image %}
-      <img src="{{ post.header_image.url }}" alt="Imagen de Post" width="600">
-    {% endif %}
-    <br>
-    <hr>
+  {% if post.header_image %}
+  <div class="header">
+  {% endif %}
+    <div class="col-md-8 mt-5 d-flex align-items-start flex-column bd-highlight mb-3" style="height: 200px;">
+      <div class="card border-success bg-transparent border-success" style="max-width: 20rem;">
+        <h1 class="mb-auto p-2 bd-highlight card-title text-primary">{{ post.title}}</h1>
+        <div class="card-body ">
+          <small class="p-2 bd-highlight text-primary">
+            By: {{ post.author.first_name }} -
+                {{ post.author.last_name }}
+            {{ post.post_date }} <br>
+            <a href="{% url 'show_profile_page' post.author.profile.id %}">
+              Página de Perfil
+            </a>
+          </small>
+          {% if post.author.profile.profile_pic.url %}
+          <img src="{{ post.author.profile.profile_pic.url }}"
+               width="80" height="80"
+               alt="Avatar Perfil"
+               class="rounded-circle p-2 bd-highlight"
+          >
+          {% else %}
+          <img src="{% static 'theblog/images/icono.jpg' %}"
+               alt="Avatar Perfil"
+               width="80" height="80"
+                class="rounded-circle p-2 bd-highlight"
+          >
+          {% endif %}
+          {% if user.is_superuser %}
+            <small class="p-2 bd-highlight">
+              <a href="{% url 'update_post' post.pk %}" class="btn btn-primary">Editar</a> -
+              <a href="{% url 'delete_post' post.pk %}" class="btn btn-primary">Eliminar</a>
+            </small>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+    <hr class="">
     {{ post.body|safe }}
     <br><br>
     <hr>
@@ -66,18 +66,6 @@
       {% endif %}
       - {{total_likes}} Me gusta
     </form>
-  </div>
-  {% if cat_menu %}
-  <div class="col-md-4 mb-3 mt-5 g-4 pb-5 rounded bg-info align-self-baseline">
-    <div class="p-3">
-      <h4 class="font-italic">Categorías:</h4>
-      <ol class="list-unstyled">
-        {% for item in cat_menu %}
-          <li><a href="{% url 'category' item %}">{{ item }}</a></li>
-        {% endfor %}
-      </ol>
-    </div>
-    {% endif %}
   </div>
 </div>
 <script>
