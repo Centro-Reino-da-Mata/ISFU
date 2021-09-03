@@ -2,15 +2,15 @@
 {% load static %}
 {% block title %} {{ post.title}} {% endblock title %}
 {% block content %}
-<div class="row mb-3 g-4">
+<div class="row mb-5 g-4">
   {% if post.header_image %}
   <div class="header">
   {% endif %}
-    <div class="col-md-8 mt-5 d-flex align-items-start flex-column bd-highlight mb-3" style="height: 200px;">
-      <div class="card border-success bg-transparent border-success" style="max-width: 20rem;">
-        <h1 class="mb-auto p-2 bd-highlight card-title text-primary">{{ post.title}}</h1>
+    <div class="col-md-8 mt-5 mr-4 d-flex align-items-start flex-column bd-highlight mb-3" style="height: 200px;">
+      <div class="card border-success bg-dark border-success" style="max-width: 20rem;">
+        <h1 class="mb-auto p-2 bd-light card-title text-primary">{{ post.title}}</h1>
         <div class="card-body ">
-          <small class="p-2 bd-highlight text-primary">
+          <small class="p-2 bd-light text-primary">
             By: {{ post.author.first_name }} -
                 {{ post.author.last_name }}
             {{ post.post_date }} <br>
@@ -31,43 +31,37 @@
                 class="rounded-circle p-2 bd-highlight"
           >
           {% endif %}
-          {% if user.is_superuser %}
-            <small class="p-2 bd-highlight">
-              <a href="{% url 'update_post' post.pk %}" class="btn btn-primary">Editar</a> -
-              <a href="{% url 'delete_post' post.pk %}" class="btn btn-primary">Eliminar</a>
-            </small>
-          {% endif %}
         </div>
       </div>
     </div>
   </div>
-    <hr class="">
+</div>
+<div class="container mb-5">
+    <hr class="w-10"style="color: white;">
     {{ post.body|safe }}
-    <br><br>
     <hr>
-    <br>
     <div id="disqus_thread"></div>
     <a href="{% url 'home' %}" class="btn btn-secondary mb-4">Volver</a>
-    <form action="{% url 'like_post' post.pk %}" method="post">
-      {% csrf_token %}
-      {% if user.is_authenticated %}
-        {% if liked %}
-          <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-danger btn-sm">
-            No me gusta
-          </button>
+      <form action="{% url 'like_post' post.pk %}" method="post">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+          {% if liked %}
+            <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-danger btn-sm">
+              No me gusta
+            </button>
 
+          {% else %}
+            <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-primary btn-sm">
+              Me gusta
+            </button>
+          {% endif %}
         {% else %}
-          <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-primary btn-sm">
-            Me gusta
-          </button>
+        <small><a href="{% url 'login' %}">Login</a>para dar me gusta</small>
         {% endif %}
-      {% else %}
-      <small><a href="{% url 'login' %}">Login</a>para dar me gusta</small>
-      {% endif %}
-      - {{total_likes}} Me gusta
-    </form>
+        - <small class="text-white">{{total_likes}} Me gusta</small>
+      </form>
+    </div>
   </div>
-</div>
 <script>
     /**
     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
