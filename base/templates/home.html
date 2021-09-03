@@ -58,14 +58,16 @@
     {% endfor %}
   </div>
   {% if cat_menu %}
-    <div class="col-md-3 position-absolute bottom-0 end-0 rounded card-blog align-self-baseline">
-      <div class="p-3">
-        <h4 class="font-italic">Categorías:</h4>
-        <ol class="list-unstyled">
-          {% for item in cat_menu %}
-            <li><a  href="{% url 'category' item %}">{{ item }}</a></li>
-          {% endfor %}
-        </ol>
+    <div class="col-md-3 rounded card-blog position-relative">
+      <div class="">
+        <div class="position-absolute top-0 start-20 ">
+          <h4 class="font-italic">Categorías:</h4>
+          <ol class="list-unstyled">
+            {% for item in cat_menu %}
+              <li><a  href="{% url 'category' item %}">{{ item }}</a></li>
+            {% endfor %}
+          </ol>
+        </div>
       </div>
     {% endif %}
   </div>
