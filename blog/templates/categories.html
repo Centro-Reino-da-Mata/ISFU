@@ -2,24 +2,38 @@
 {% block title %}{{ cats }} {% endblock title %}
 {% block content %}
 {% if category_posts %}
-  <div class="contanier mt-4 mb-5">
-    <h1>{{ cats }}</h1>
-    <ul>
-    {% for post in category_posts %}
-      <li>
-        <a href="{% url 'article-detail' post.pk %}"> {{ post.title }} </a> -
-        {{ post.category }}
-        {{ post.author.first_name }} - {{ post.author.email }} - {{ post.post_date }}
-        {% if user.is_superuser %}
-          <small><a href="{% url 'update_post' post.pk %}">(Editar)</a></small> -
-          <small><a href="{% url 'delete_post' post.pk %}">(Eliminar)</a></small>
-          <br />
-        {% endif %}
-      </li>
+      <div class="contanier mt-4 mb-5">
+        <h1>{{ cats }}</h1>
+        {% for post in category_posts %}
+          <div class="row row-cols-1 row-cols-md-2 g-4 mb-3">
+            <div class="col mt-5 mb-3">
+                <div class="card mb-4 flex-md-row card-blog rounded-end">
+                  <div class="card-body d-flex flex-column align-items-start">
+                    <h5 class="card-title">
+                      <a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a>
+                    </h5>
+                    <p class="text-white">{{ post.category }}</p>
+                    <small class="text-muted">{{ post.post_date }}</small>
+                    <small class="text-muted">Autor:{{ post.author.username }}</small>
+                    {% if user.is_superuser %}
+                    <p class="card-text">
+                      <small class="text-muted">
+                         <a href="{% url 'update_post' post.pk %}">(Editar)</a>
+                      </small>
+                      <small class="text-muted">
+                         <a href="{% url 'delete_post' post.pk %}">(Eliminar)</a>
+                      </small>
+                    </p>
+                    {% endif %}
+                  </div>
+                  <img class="card-img-right flex-auto d-none d-lg-block w-100 rounded-end" src="{{ post.header_image.url }}"
+                       alt="Imagen de Publicación"
+                        style="max-width: 400px"/>
+                </div>
+            </div>
+      </div>
     {% endfor %}
-    </ul>
   </div>
-
 {% else %}
   <div class="container mt-4 mb-5">
     <h2 class="text-danger">Lo sentimos está página no existe ....</h2>
