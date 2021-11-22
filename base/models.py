@@ -1,3 +1,23 @@
+from django.db import models
+
+
+class Contacto(models.Model):
+    nombre = models.CharField('Nombre', max_length = 100)
+    apellidos = models.CharField('Apellidos', max_length = 150)
+    correo = models.EmailField('Correo Electrónico', max_length = 200)
+    mensaje = models.TextField('Mensaje')
+
+    class Meta:
+        verbose_name = 'Contacto'
+        verbose_name_plural = 'Contactos'
+
+    def __str__(self):
+        return self.nombre
+
+
+
+
+
 # from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 # from django.contrib.auth.models import PermissionsMixin
 # from django.core.mail import send_mail

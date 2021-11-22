@@ -1,8 +1,9 @@
 from django.urls import path
 
-from .views import home
+from .views import galeria, ContactCreateView
 
 
 urlpatterns = [
-    path('', home, name='home')
+    path('galeria/', galeria, name='galeria'),
+    path('contacto/', ContactCreateView.as_view(), name='contacto'),
 ]

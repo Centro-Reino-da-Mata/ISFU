@@ -1,6 +1,3 @@
-
-
-
 from django.conf import settings
 from django.contrib import admin, messages
 from django.contrib.admin.options import IS_POPUP_VAR
@@ -19,6 +16,10 @@ from django.utils.html import escape
 from django.utils.translation import gettext, gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
+
+from .models import Contacto
+
+admin.site.register(Contacto)
 
 # from .models import User
 #

@@ -51,17 +51,3 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('home')
-
-class Contacto(models.Model):
-    nombre = models.CharField('Nombre', max_length = 100)
-    apellidos = models.CharField('Apellidos', max_length = 150)
-    correo = models.EmailField('Correo Electrónico', max_length = 200)
-    asunto = models.CharField('Asunto', max_length = 100)
-    mensaje = models.TextField('Mensaje')
-
-    class Meta:
-        verbose_name = 'Contacto'
-        verbose_name_plural = 'Contactos'
-
-    def __str__(self):
-        return self.asunto

@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post, Category
-from .forms import PostForm, EditForm, ContactoForm
+from .forms import PostForm, EditForm
 from django.urls import reverse_lazy, reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, request
 
 
 def LikeView(request, pk):
@@ -80,21 +80,3 @@ class DeletePostView(DeleteView):
     model = Post
     template_name = 'delete_post.html'
     success_url = reverse_lazy('home')
-
-
-class FormularioContacto(View):
-    def get(self,request):
-        form = ContactoForm()
-        contexto = {'form':form,}
-        return render(request,'contacto.html',contexto)
-
-    def post(self,request,*args,**kwargs):
-        form = ContactoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-        else:
-            contexto = {
-                'form':form,
-            }
-            return render(request,'contacto.html',contexto)
