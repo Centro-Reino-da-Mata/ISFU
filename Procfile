@@ -1,0 +1,1 @@
+web: gunicorn ISFU.wsgi --log-file -
